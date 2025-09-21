@@ -1,4 +1,6 @@
 ---
+import { getIllustrationUrl } from '../utils/illustrations';
+
 interface Item {
   title: string;
   description?: string;
@@ -31,11 +33,12 @@ const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
   <h2>{section.title}</h2>
   <div class={gridClass}>
     {section.items.map((item, index) => {
-      const illustration = item.illustration
-        ? `url(/assets/illustrations/${item.illustration})`
-        : undefined;
+      const illustration = getIllustrationUrl(item.illustration);
       return (
-        <article class={cardClass} style:--card-illustration={illustration}>
+        <article
+          class={cardClass}
+          style:--card-illustration={illustration ? `url(${illustration})` : undefined}
+        >
           {section.tag && <span class="badge">{section.tag} {index + 1}</span>}
           <h3>{item.title}</h3>
           {item.description && <p>{item.description}</p>}

@@ -5,6 +5,7 @@ import Footer from '@components/Footer.astro';
 import ContentSection from '@components/ContentSection.astro';
 import { getEntry, getCollection } from 'astro:content';
 import homeSections from '../data/home-sections.json';
+import { getIllustrationUrl } from '../utils/illustrations';
 
 const homeEntry = await getEntry('home', 'home');
 const data = homeEntry?.data!;
@@ -75,8 +76,8 @@ const sections = homeSections;
         <div
           class="card"
           style:--card-illustration={
-            data.contact.illustration
-              ? `url(/assets/illustrations/${data.contact.illustration})`
+            getIllustrationUrl(data.contact.illustration)
+              ? `url(${getIllustrationUrl(data.contact.illustration)})`
               : undefined
           }
         >
@@ -90,8 +91,8 @@ const sections = homeSections;
           class="card contact-cta"
           href={`mailto:${data.contact.email}`}
           style:--card-illustration={
-            data.contact.actionIllustration
-              ? `url(/assets/illustrations/${data.contact.actionIllustration})`
+            getIllustrationUrl(data.contact.actionIllustration)
+              ? `url(${getIllustrationUrl(data.contact.actionIllustration)})`
               : undefined
           }
         >
