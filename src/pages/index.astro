@@ -4,14 +4,15 @@ import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
 import ContentSection from '@components/ContentSection.astro';
 import { getEntry, getCollection } from 'astro:content';
+import homeSections from '../data/home-sections.json';
 
 const homeEntry = await getEntry('home', 'home');
 const data = homeEntry?.data!;
 const Content = await homeEntry?.render().then((result) => result.Content);
-const { sections } = data;
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
+const sections = homeSections;
 ---
 <BaseLayout title={data.seo?.title ?? data.title} description={data.seo?.description ?? data.description}>
   <Nav />
@@ -38,7 +39,7 @@ const posts = (await getCollection('blog'))
       </div>
     </section>
 
-    <ContentSection id="services" section={sections.services} variant="service" />
+    <ContentSection id="services" section={sections.services} />
 
     <ContentSection id="tech" section={sections.techStack} />
 
@@ -73,9 +74,9 @@ const posts = (await getCollection('blog'))
       <div class="grid grid-2">
         <div
           class="card"
-          style={
+          style:--card-illustration={
             data.contact.illustration
-              ? { '--card-illustration': `url(/assets/illustrations/${data.contact.illustration})` }
+              ? `url(/assets/illustrations/${data.contact.illustration})`
               : undefined
           }
         >
@@ -88,9 +89,9 @@ const posts = (await getCollection('blog'))
         <a
           class="card contact-cta"
           href={`mailto:${data.contact.email}`}
-          style={
+          style:--card-illustration={
             data.contact.actionIllustration
-              ? { '--card-illustration': `url(/assets/illustrations/${data.contact.actionIllustration})` }
+              ? `url(/assets/illustrations/${data.contact.actionIllustration})`
               : undefined
           }
         >

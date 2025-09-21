@@ -1,20 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-const contentSectionItem = z.object({
-  title: z.string(),
-  description: z.string().optional(),
-  bullets: z.array(z.string()).optional(),
-  items: z.array(z.string()).optional(),
-  illustration: z.string().optional()
-});
-
-const contentSection = z.object({
-  title: z.string(),
-  layout: z.enum(['two', 'three']).optional(),
-  tag: z.string().optional(),
-  items: z.array(contentSectionItem)
-});
-
 const home = defineCollection({
   type: 'content',
   schema: z.object({
@@ -32,12 +17,6 @@ const home = defineCollection({
         href: z.string()
       })
       .optional(),
-    sections: z.object({
-      services: contentSection,
-      techStack: contentSection,
-      values: contentSection,
-      process: contentSection
-    }),
     blogTeaser: z.object({
       title: z.string(),
       description: z.string()

@@ -11,6 +11,7 @@ interface Section {
   title: string;
   layout?: 'two' | 'three';
   tag?: string;
+  variant?: 'card' | 'service';
   items: Item[];
 }
 
@@ -20,9 +21,11 @@ interface Props {
   variant?: 'card' | 'service';
 }
 
-const { id, section, variant = 'card' } = Astro.props;
-const gridClass = section.layout === 'two' ? 'grid grid-2' : 'grid grid-3';
-const cardClass = variant === 'service' ? 'service-card' : 'card';
+const { id, section, variant } = Astro.props;
+const layout = section.layout ?? 'three';
+const gridClass = layout === 'two' ? 'grid grid-2' : 'grid grid-3';
+const cardVariant = section.variant ?? variant ?? 'card';
+const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
 ---
 <section id={id}>
   <h2>{section.title}</h2>
@@ -31,9 +34,8 @@ const cardClass = variant === 'service' ? 'service-card' : 'card';
       const illustration = item.illustration
         ? `url(/assets/illustrations/${item.illustration})`
         : undefined;
-      const cardStyle = illustration ? { '--card-illustration': illustration } : undefined;
       return (
-        <article class={cardClass} style={cardStyle as any}>
+        <article class={cardClass} style:--card-illustration={illustration}>
           {section.tag && <span class="badge">{section.tag} {index + 1}</span>}
           <h3>{item.title}</h3>
           {item.description && <p>{item.description}</p>}
