@@ -1,18 +1,24 @@
 ---
 import logoUrl from '@assets/logo.svg?url';
+import menuIconUrl from '@assets/apps-rectangle.svg?url';
 
 const isHome = Astro.url.pathname === '/';
 const link = (anchor: string) => (isHome ? anchor : `/${anchor}`);
 ---
 <nav>
   <div class="navbar">
-    <a class="nav-brand" href="/" aria-label="Flexagon Technologies — на главную">
-      <span class="nav-logo">
-        <img src={logoUrl} alt="Flexagon Technologies" width="140" height="48" loading="lazy" />
-      </span>
-      <span class="nav-title" role="heading" aria-level="1">Flexagon Technologies</span>
-    </a>
-    <div class="nav-links">
+    <div class="nav-main">
+      <a class="nav-brand" href="/" aria-label="Flexagon Technologies — на главную">
+        <span class="nav-logo">
+          <img src={logoUrl} alt="Flexagon Technologies" width="140" height="48" loading="lazy" />
+        </span>
+        <span class="nav-title" role="heading" aria-level="1">Flexagon Technologies</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-controls="nav-menu" aria-expanded="false">
+        <img src={menuIconUrl} alt="" aria-hidden="true" width="28" height="28" loading="lazy" />
+      </button>
+    </div>
+    <div class="nav-links" id="nav-menu">
       <a href={link('#services')}>Услуги</a>
       <a href={link('#tech')}>Технологии</a>
       <a href={link('#process')}>Процесс</a>
@@ -21,3 +27,41 @@ const link = (anchor: string) => (isHome ? anchor : `/${anchor}`);
     </div>
   </div>
 </nav>
+<script type="module">
+  document.addEventListener('astro:load', () => {
+    document.querySelectorAll('.navbar').forEach((navbar) => {
+      const toggle = navbar.querySelector('.nav-toggle');
+      const navLinks = navbar.querySelector('.nav-links');
+
+      if (!(toggle instanceof HTMLButtonElement) || !(navLinks instanceof HTMLElement)) {
+        return;
+      }
+
+      const closeMenu = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню');
+        navLinks.classList.remove('is-open');
+      };
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        const nextExpanded = !expanded;
+
+        toggle.setAttribute('aria-expanded', String(nextExpanded));
+        toggle.setAttribute('aria-label', nextExpanded ? 'Закрыть меню' : 'Открыть меню');
+        navLinks.classList.toggle('is-open', nextExpanded);
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      const desktopMediaQuery = window.matchMedia('(min-width: 769px)');
+      desktopMediaQuery.addEventListener('change', (event) => {
+        if (event.matches) {
+          closeMenu();
+        }
+      });
+    });
+  });
+</script>
