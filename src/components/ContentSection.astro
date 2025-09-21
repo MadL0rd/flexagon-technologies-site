@@ -1,6 +1,4 @@
 ---
-import { getIllustrationUrl } from '../utils/illustrations';
-
 interface Item {
   title: string;
   description?: string;
@@ -33,7 +31,7 @@ const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
   <h2>{section.title}</h2>
   <div class={gridClass}>
     {section.items.map((item, index) => {
-      const illustration = getIllustrationUrl(item.illustration);
+      const illustration = item.illustration ? `/illustrations/${item.illustration}` : undefined;
       return (
         <article
           class={cardClass}

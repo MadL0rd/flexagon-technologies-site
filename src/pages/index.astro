@@ -5,7 +5,6 @@ import Footer from '@components/Footer.astro';
 import ContentSection from '@components/ContentSection.astro';
 import { getEntry, getCollection } from 'astro:content';
 import homeSections from '../data/home-sections.json';
-import { getIllustrationUrl } from '../utils/illustrations';
 
 const homeEntry = await getEntry('home', 'home');
 const data = homeEntry?.data!;
@@ -79,9 +78,9 @@ const sections = homeSections;
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
-          {getIllustrationUrl(data.contact.illustration) && (
+          {data.contact.illustration && (
             <img
-              src={getIllustrationUrl(data.contact.illustration)!}
+              src={`/illustrations/${data.contact.illustration}`}
               alt=""
               class="card__illustration"
               loading="lazy"
@@ -93,9 +92,9 @@ const sections = homeSections;
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>
-          {getIllustrationUrl(data.contact.actionIllustration) && (
+          {data.contact.actionIllustration && (
             <img
-              src={getIllustrationUrl(data.contact.actionIllustration)!}
+              src={`/illustrations/${data.contact.actionIllustration}`}
               alt=""
               class="card__illustration"
               loading="lazy"
