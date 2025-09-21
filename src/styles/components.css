@@ -149,13 +149,11 @@
 
 .card__illustration {
   position: absolute;
-  bottom: -24px;
-  right: -24px;
-  width: 160px;
-  height: 160px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: var(--card-illustration-opacity, 0.18);
+  bottom: 12px;
+  right: 12px;
+  width: 140px;
+  height: auto;
+  opacity: 0.18;
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
@@ -164,8 +162,8 @@
 .service-card:hover .card__illustration,
 .blog-card:hover .card__illustration,
 .contact-cta:hover .card__illustration {
-  opacity: calc(var(--card-illustration-opacity, 0.18) + 0.1);
-  transform: translate(-10px, 10px);
+  opacity: 0.28;
+  transform: translate(-6px, 6px);
 }
 
 .contact-cta:hover {
@@ -196,56 +194,4 @@
   color: rgba(170, 255, 160, 0.95);
   border-color: rgba(170, 255, 160, 0.95);
   text-decoration: none;
-}
-
-[data-illustration='network-node']::after {
-  background-image: url('../assets/illustrations/network-node.svg');
-}
-
-[data-illustration='frontend-layout']::after {
-  background-image: url('../assets/illustrations/frontend-layout.svg');
-}
-
-[data-illustration='mobile-device']::after {
-  background-image: url('../assets/illustrations/mobile-device.svg');
-}
-
-[data-illustration='generic-orbit']::after {
-  background-image: url('../assets/illustrations/generic-orbit.svg');
-}
-
-[data-illustration='growth-chart']::after {
-  background-image: url('../assets/illustrations/growth-chart.svg');
-}
-
-[data-illustration='discipline-monitor']::after {
-  background-image: url('../assets/illustrations/discipline-monitor.svg');
-}
-
-[data-illustration='chat-bubbles'] {
-  --card-illustration-opacity: 0.2;
-}
-
-[data-illustration='chat-bubbles']::after {
-  background-image: url('../assets/illustrations/chat-bubbles.svg');
-}
-
-[data-illustration='process-discovery']::after {
-  background-image: url('../assets/illustrations/process-discovery.svg');
-}
-
-[data-illustration='process-design']::after {
-  background-image: url('../assets/illustrations/process-design.svg');
-}
-
-[data-illustration='process-build']::after {
-  background-image: url('../assets/illustrations/process-build.svg');
-}
-
-[data-illustration='process-support']::after {
-  background-image: url('../assets/illustrations/process-support.svg');
-}
-
-[data-illustration='contact-action']::after {
-  background-image: url('../assets/illustrations/contact-action.svg');
 }

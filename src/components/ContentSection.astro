@@ -55,7 +55,15 @@ const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
               ))}
             </ul>
           )}
-          {illustration && <span class="card__illustration" style={{ backgroundImage: `url(${illustration})` }} aria-hidden="true" />}
+          {illustration && (
+            <img
+              src={illustration}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              class="card__illustration"
+            />
+          )}
         </article>
       );
     })}

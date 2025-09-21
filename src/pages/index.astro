@@ -82,10 +82,12 @@ const sections = homeSections;
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
           {getIllustrationUrl(data.contact.illustration) && (
-            <span
+            <img
+              src={getIllustrationUrl(data.contact.illustration)!}
+              alt=""
               class="card__illustration"
-              style={{ backgroundImage: `url(${getIllustrationUrl(data.contact.illustration)})` }}
-              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
             />
           )}
         </div>
@@ -97,10 +99,12 @@ const sections = homeSections;
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>
           {getIllustrationUrl(data.contact.actionIllustration) && (
-            <span
+            <img
+              src={getIllustrationUrl(data.contact.actionIllustration)!}
+              alt=""
               class="card__illustration"
-              style={{ backgroundImage: `url(${getIllustrationUrl(data.contact.actionIllustration)})` }}
-              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
             />
           )}
         </a>
