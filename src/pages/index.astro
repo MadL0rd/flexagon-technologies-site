@@ -73,9 +73,7 @@ const sections = homeSections;
     <section id="contact">
       <h2>Свяжитесь с нами</h2>
       <div class="grid grid-2">
-        <div
-          class="card"
-        >
+        <div class="card">
           <h3>Контакты</h3>
           <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
@@ -91,10 +89,7 @@ const sections = homeSections;
             />
           )}
         </div>
-        <a
-          class="card contact-cta"
-          href={`mailto:${data.contact.email}`}
-        >
+        <a class="card contact-cta" href={`mailto:${data.contact.email}`}>
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>
