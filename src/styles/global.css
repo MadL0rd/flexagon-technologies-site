@@ -158,25 +158,57 @@ p {
 }
 
 footer {
-  background: rgba(17, 18, 22, 0.85);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 3rem 0;
+  background: rgba(17, 18, 22, 0.88);
+  border-top: 1px solid rgba(74, 183, 22, 0.4);
+  padding: 2.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 10% 50%, rgba(74, 183, 22, 0.18), transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(74, 183, 22, 0.12), transparent 50%);
+  opacity: 0.4;
 }
 
 footer .inner {
   width: min(100% - 2rem, var(--max-width));
   margin: 0 auto;
-  display: grid;
-  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+footer .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(248, 249, 251, 0.78);
+  font-size: 0.95rem;
+}
+
+footer .brand img {
+  width: 36px;
+  height: auto;
+  opacity: 0.9;
 }
 
 footer p {
   margin: 0;
-  color: rgba(248, 249, 251, 0.7);
+  color: rgba(248, 249, 251, 0.72);
+  font-size: 0.9rem;
 }
 
 footer a {
-  color: var(--color-primary);
+  color: rgba(140, 255, 120, 0.8);
 }
 
 .tag-list {
@@ -205,6 +237,21 @@ footer a {
   transform: translateY(-4px);
   border-color: rgba(142, 255, 110, 0.85);
   box-shadow: 0 22px 45px rgba(74, 183, 22, 0.22);
+}
+
+#contact .card a {
+  color: rgba(140, 255, 120, 0.8);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+#contact .card a:hover,
+#contact .card a:focus {
+  color: rgba(170, 255, 160, 0.95);
+  border-color: rgba(170, 255, 160, 0.95);
+  text-decoration: none;
 }
 
 .prose {
