@@ -37,7 +37,6 @@ const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
       return (
         <article
           class={cardClass}
-          style:--card-illustration={illustration ? `url(${illustration})` : undefined}
         >
           {section.tag && <span class="badge">{section.tag} {index + 1}</span>}
           <h3>{item.title}</h3>
@@ -56,6 +55,7 @@ const cardClass = cardVariant === 'service' ? 'service-card' : 'card';
               ))}
             </ul>
           )}
+          {illustration && <span class="card__illustration" style={{ backgroundImage: `url(${illustration})` }} aria-hidden="true" />}
         </article>
       );
     })}

@@ -147,17 +147,12 @@
   --card-illustration-opacity: 0.18;
 }
 
-.card::after,
-.service-card::after,
-.blog-card::after,
-.contact-cta::after {
-  content: '';
+.card__illustration {
   position: absolute;
   bottom: -24px;
   right: -24px;
   width: 160px;
   height: 160px;
-  background-image: var(--card-illustration, none);
   background-repeat: no-repeat;
   background-size: contain;
   opacity: var(--card-illustration-opacity, 0.18);
@@ -165,10 +160,10 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.card:hover::after,
-.service-card:hover::after,
-.blog-card:hover::after,
-.contact-cta:hover::after {
+.card:hover .card__illustration,
+.service-card:hover .card__illustration,
+.blog-card:hover .card__illustration,
+.contact-cta:hover .card__illustration {
   opacity: calc(var(--card-illustration-opacity, 0.18) + 0.1);
   transform: translate(-10px, 10px);
 }

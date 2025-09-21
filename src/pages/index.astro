@@ -75,30 +75,34 @@ const sections = homeSections;
       <div class="grid grid-2">
         <div
           class="card"
-          style:--card-illustration={
-            getIllustrationUrl(data.contact.illustration)
-              ? `url(${getIllustrationUrl(data.contact.illustration)})`
-              : undefined
-          }
         >
           <h3>Контакты</h3>
           <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
+          {getIllustrationUrl(data.contact.illustration) && (
+            <span
+              class="card__illustration"
+              style={{ backgroundImage: `url(${getIllustrationUrl(data.contact.illustration)})` }}
+              aria-hidden="true"
+            />
+          )}
         </div>
         <a
           class="card contact-cta"
           href={`mailto:${data.contact.email}`}
-          style:--card-illustration={
-            getIllustrationUrl(data.contact.actionIllustration)
-              ? `url(${getIllustrationUrl(data.contact.actionIllustration)})`
-              : undefined
-          }
         >
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>
+          {getIllustrationUrl(data.contact.actionIllustration) && (
+            <span
+              class="card__illustration"
+              style={{ backgroundImage: `url(${getIllustrationUrl(data.contact.actionIllustration)})` }}
+              aria-hidden="true"
+            />
+          )}
         </a>
       </div>
     </section>
