@@ -1,20 +1,24 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import Nav from '@components/Nav.astro';
-import Footer from '@components/Footer.astro';
-import ContentSection from '@components/ContentSection.astro';
-import { getEntry, getCollection } from 'astro:content';
-import homeSections from '../data/home-sections.json';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Nav from "@components/Nav.astro";
+import Footer from "@components/Footer.astro";
+import ContentSection from "@components/ContentSection.astro";
+import { getEntry, getCollection } from "astro:content";
+import homeSections from "../data/home-sections.json";
 
-const homeEntry = await getEntry('home', 'home');
+const homeEntry = await getEntry("home", "home");
 const data = homeEntry?.data!;
 const Content = await homeEntry?.render().then((result) => result.Content);
-const posts = (await getCollection('blog'))
+const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
 const sections = homeSections;
 ---
-<BaseLayout title={data.seo?.title ?? data.title} description={data.seo?.description ?? data.description}>
+
+<BaseLayout
+  title={data.seo?.title ?? data.title}
+  description={data.seo?.description ?? data.description}
+>
   <Nav />
   <main id="top">
     <section class="hero" id="hero">
@@ -24,11 +28,17 @@ const sections = homeSections;
         <p class="hero__description">{data.description}</p>
         <div class="hero__cta">
           <a class="button" href={data.cta.href}>{data.cta.label}</a>
-          {data.secondaryCta && (
-            <a class="button" style="background: rgba(255,255,255,0.12); box-shadow: none;" href={data.secondaryCta.href}>
-              {data.secondaryCta.label}
-            </a>
-          )}
+          {
+            data.secondaryCta && (
+              <a
+                class="button"
+                style="background: rgba(255,255,255,0.12); box-shadow: none;"
+                href={data.secondaryCta.href}
+              >
+                {data.secondaryCta.label}
+              </a>
+            )
+          }
         </div>
       </div>
       <div class="card">
@@ -51,18 +61,20 @@ const sections = homeSections;
       <h2>{data.blogTeaser.title}</h2>
       <p>{data.blogTeaser.description}</p>
       <div class="grid grid-2" style="margin-top: 2rem;">
-        {posts.map((post) => (
-          <a class="blog-card" href={`/blog/${post.slug}/`}>
-            <span class="blog-card__title">{post.data.title}</span>
-            <p>{post.data.description}</p>
-            <div class="tag-list" style="margin-top: 1.25rem;">
-              <span class="tag">{new Date(post.data.pubDate).toLocaleDateString('ru-RU')}</span>
-              {post.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          </a>
-        ))}
+        {
+          posts.map((post) => (
+            <a class="blog-card" href={`/blog/${post.slug}/`}>
+              <span class="blog-card__title">{post.data.title}</span>
+              <p>{new Date(post.data.pubDate).toLocaleDateString("ru-RU")}</p>
+              <p>{post.data.description}</p>
+              <div class="tag-list" style="margin-top: 1.25rem;">
+                {post.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))
+        }
       </div>
       <div style="margin-top: 2rem;">
         <a class="button" href="/blog">Все статьи</a>
@@ -74,30 +86,52 @@ const sections = homeSections;
       <div class="grid grid-2">
         <div
           class="card"
-          style={
-            data.contact.illustration
-              ? `--illustration-url: url(/illustrations/${data.contact.illustration});`
-              : undefined
-          }
+          style={data.contact.illustration
+            ? `--illustration-url: url(/illustrations/${data.contact.illustration});`
+            : undefined}
         >
           <h3>Контакты</h3>
-          <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
-          <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
-          <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
+          <p>
+            Email: <a href={`mailto:${data.contact.email}`}
+              >{data.contact.email}</a
+            >
+          </p>
+          <p>
+            Телефон: <a
+              href={`tel:${data.contact.phone.replace(/[^+\d]/g, "")}`}
+              >{data.contact.phone}</a
+            >
+          </p>
+          <p>
+            Telegram: <a
+              href={data.contact.telegram}
+              target="_blank"
+              rel="noopener">{data.contact.telegram}</a
+            >
+          </p>
           <p>Локация: {data.contact.address}</p>
-          {data.contact.illustration && <span class="card__illustration" aria-hidden="true" />}
+          {
+            data.contact.illustration && (
+              <span class="card__illustration" aria-hidden="true" />
+            )
+          }
         </div>
         <a class="card contact-cta" href={`mailto:${data.contact.email}`}>
           <h3>Как начинаем работу</h3>
-          <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
+          <p>
+            Оставьте заявку, мы проведем вводной созвон и подготовим детальную
+            оценку с вариантами сотрудничества.
+          </p>
           <span class="button button--secondary">Назначить встречу</span>
-          {data.contact.actionIllustration && (
-            <span
-              class="card__illustration"
-              aria-hidden="true"
-              style={`--illustration-url: url(/illustrations/${data.contact.actionIllustration});`}
-            />
-          )}
+          {
+            data.contact.actionIllustration && (
+              <span
+                class="card__illustration"
+                aria-hidden="true"
+                style={`--illustration-url: url(/illustrations/${data.contact.actionIllustration});`}
+              />
+            )
+          }
         </a>
       </div>
     </section>

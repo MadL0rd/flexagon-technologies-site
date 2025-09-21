@@ -68,7 +68,7 @@
       },
       {
         "title": "Инженерная дисциплина",
-        "illustration": "computer.svg",
+        "illustration": "monitor.svg",
         "description": "Поддерживаем качество через code review, автоматизированные проверки и метрики производительности."
       },
       {
@@ -85,22 +85,22 @@
     "items": [
       {
         "title": "Диагностика",
-        "illustration": "book-search.svg",
+        "illustration": "notes-edit-search.svg",
         "description": "Анализируем текущие системы, собираем ограничения, проводим product discovery и технический аудит."
       },
       {
         "title": "Инженерный дизайн",
-        "illustration": "process-design.svg",
+        "illustration": "widgets.svg",
         "description": "Согласуем целевую архитектуру, выбираем стек и паттерны, планируем релизы и инфраструктуру."
       },
       {
         "title": "Разработка",
-        "illustration": "process-build.svg",
+        "illustration": "apps-add.svg",
         "description": "Настраиваем CI/CD, пишем код итерациями, покрываем критические сценарии автоматическими тестами."
       },
       {
         "title": "Умная поддержка",
-        "illustration": "process-support.svg",
+        "illustration": "quiz.svg",
         "description": "Следим за показателями, оптимизируем и развиваем продукт после релиза."
       }
     ]

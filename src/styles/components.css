@@ -141,8 +141,8 @@
 
 .card__illustration {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
+  bottom: 0px;
+  right: 0px;
   width: 96px;
   height: 96px;
   background: linear-gradient(135deg, rgba(128, 205, 92, 0.75), rgba(128, 205, 92, 0.3));
@@ -159,7 +159,7 @@
 .blog-card:hover .card__illustration,
 .contact-cta:hover .card__illustration {
   opacity: 0.32;
-  transform: translate(-16px, -16px);
+  transform: translate(-12px, -12px);
 }
 
 .contact-cta:hover {

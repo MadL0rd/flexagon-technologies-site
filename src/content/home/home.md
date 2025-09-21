@@ -17,8 +17,8 @@ contact:
   phone: "+7 (999) 123-45-67"
   telegram: "https://t.me/flexagon"
   address: "Distributed team · Remote first"
-  illustration: "chat-bubbles.svg"
-  actionIllustration: "contact-action.svg"
+  illustration: "chat-favourite.svg"
+  actionIllustration: "calendar-check.svg"
 seo:
   title: "Flexagon Technologies — разработка на NestJS, React и LynxJS"
   description: "Full-stack IT студия, которая помогает запускать и масштабировать цифровые продукты на backend NestJS, фронтенде React и мобильном LynxJS."
