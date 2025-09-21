@@ -72,33 +72,30 @@ const sections = homeSections;
     <section id="contact">
       <h2>Свяжитесь с нами</h2>
       <div class="grid grid-2">
-        <div class="card">
+        <div
+          class="card"
+          style={
+            data.contact.illustration
+              ? `--illustration-url: url(/illustrations/${data.contact.illustration});`
+              : undefined
+          }
+        >
           <h3>Контакты</h3>
           <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
-          {data.contact.illustration && (
-            <img
-              src={`/illustrations/${data.contact.illustration}`}
-              alt=""
-              class="card__illustration"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+          {data.contact.illustration && <span class="card__illustration" aria-hidden="true" />}
         </div>
         <a class="card contact-cta" href={`mailto:${data.contact.email}`}>
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>
           {data.contact.actionIllustration && (
-            <img
-              src={`/illustrations/${data.contact.actionIllustration}`}
-              alt=""
+            <span
               class="card__illustration"
-              loading="lazy"
-              decoding="async"
+              aria-hidden="true"
+              style={`--illustration-url: url(/illustrations/${data.contact.actionIllustration});`}
             />
           )}
         </a>

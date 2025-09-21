@@ -144,10 +144,12 @@
   bottom: 12px;
   right: 12px;
   width: 120px;
-  height: auto;
-  opacity: 0.18;
-  mix-blend-mode: lighten;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+  height: 120px;
+  background: linear-gradient(135deg, rgba(128, 205, 92, 0.8), rgba(128, 205, 92, 0.35));
+  mask: var(--illustration-url) center/contain no-repeat;
+  -webkit-mask: var(--illustration-url) center/contain no-repeat;
+  opacity: 0.22;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3));
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }

@@ -6,7 +6,7 @@
     "items": [
       {
         "title": "Серверная архитектура на NestJS",
-        "illustration": "network-node.svg",
+        "illustration": "package.svg",
         "description": "Проектируем модульную доменную архитектуру, покрытую тестами и готовую к росту нагрузки.",
         "bullets": [
           "Проработка микросервисных и монолитных сценариев",
@@ -16,7 +16,7 @@
       },
       {
         "title": "Фронтенд на React",
-        "illustration": "frontend-layout.svg",
+        "illustration": "devices.svg",
         "description": "Создаем интерфейсы с высокой скоростью отклика и доступностью, подключаем дизайн-системы и аналитики.",
         "bullets": [
           "SSR, SSG и гибридные подходы",
@@ -26,7 +26,7 @@
       },
       {
         "title": "Мобильные продукты на LynxJS",
-        "illustration": "mobile-device.svg",
+        "illustration": "mobile.svg",
         "description": "Собираем производительные мультиплатформенные приложения с единым кодовым базисом.",
         "bullets": [
           "Оптимизированные интерфейсы под iOS и Android",
@@ -42,17 +42,17 @@
     "items": [
       {
         "title": "Backend",
-        "illustration": "network-node.svg",
+        "illustration": "package.svg",
         "items": ["NestJS", "Node.js", "PostgreSQL", "MongoDB", "Redis"]
       },
       {
         "title": "Frontend",
-        "illustration": "frontend-layout.svg",
+        "illustration": "devices.svg",
         "items": ["React", "Astro", "Tailwind CSS"]
       },
       {
         "title": "Mobile",
-        "illustration": "mobile-device.svg",
+        "illustration": "mobile.svg",
         "items": ["LynxJS", "Swift", "React Native"]
       }
     ]
@@ -63,12 +63,12 @@
     "items": [
       {
         "title": "Продуктовая вовлеченность",
-        "illustration": "growth-chart.svg",
+        "illustration": "line-chart.svg",
         "description": "Работаем как продуктовые партнеры: разбираемся в бизнес-целях, выстраиваем roadmap и помогаем с исследованиями."
       },
       {
         "title": "Инженерная дисциплина",
-        "illustration": "discipline-monitor.svg",
+        "illustration": "computer.svg",
         "description": "Поддерживаем качество через code review, автоматизированные проверки и метрики производительности."
       },
       {
