@@ -117,8 +117,8 @@
 
 .nav-toggle__icon {
   display: inline-flex;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 4rem;
+  height: 4rem;
   align-items: center;
   justify-content: center;
   transition: transform 0.25s ease;
