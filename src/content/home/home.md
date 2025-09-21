@@ -52,7 +52,7 @@ techStack:
       - LynxJS
       - Swift
       - React Native
-values:
+companyAdvantages:
   - title: "Продуктовая вовлеченность"
     illustration: "growth-chart"
     description: "Работаем как продуктовые партнеры: разбираемся в бизнес-целях, выстраиваем roadmap и помогаем с исследованиями."

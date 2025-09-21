@@ -5,8 +5,8 @@ import Footer from '@components/Footer.astro';
 import { getEntry, getCollection } from 'astro:content';
 
 const homeEntry = await getEntry('home', 'home');
-const { data } = homeEntry;
-const { Content } = await homeEntry.render();
+const data = homeEntry?.data!;
+const Content = await homeEntry?.render().then(result => result.Content);
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
@@ -74,10 +74,10 @@ const posts = (await getCollection('blog'))
       </div>
     </section>
 
-    <section id="values">
+    <section id="companyAdvantages">
       <h2>Что нас отличает</h2>
       <div class="grid grid-3">
-        {data.values.map((value) => (
+        {data.companyAdvantages.map((value) => (
           <article class="card" data-illustration={value.illustration ?? undefined}>
             <h3>{value.title}</h3>
             <p>{value.description}</p>

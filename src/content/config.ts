@@ -32,7 +32,7 @@ const home = defineCollection({
         items: z.array(z.string())
       })
     ),
-    values: z.array(
+    companyAdvantages: z.array(
       z.object({
         title: z.string(),
         description: z.string(),
