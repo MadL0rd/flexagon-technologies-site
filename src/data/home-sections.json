@@ -63,7 +63,7 @@
     "items": [
       {
         "title": "Продуктовая вовлеченность",
-        "illustration": "line-chart.svg",
+        "illustration": "chart-arrow-up.svg",
         "description": "Работаем как продуктовые партнеры: разбираемся в бизнес-целях, выстраиваем roadmap и помогаем с исследованиями."
       },
       {
@@ -73,7 +73,7 @@
       },
       {
         "title": "Прозрачная коммуникация",
-        "illustration": "chat-bubbles.svg",
+        "illustration": "chat-love.svg",
         "description": "Строим процессы на открытой отчетности и регулярных синках, предоставляем понятные статусы и цифры."
       }
     ]
@@ -85,7 +85,7 @@
     "items": [
       {
         "title": "Диагностика",
-        "illustration": "process-discovery.svg",
+        "illustration": "book-search.svg",
         "description": "Анализируем текущие системы, собираем ограничения, проводим product discovery и технический аудит."
       },
       {
