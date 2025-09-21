@@ -1,0 +1,154 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+const homeEntry = await getEntry('home', 'home');
+const { data } = homeEntry;
+const { Content } = await homeEntry.render();
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+---
+<BaseLayout title={data.seo?.title ?? data.title} description={data.seo?.description ?? data.description}>
+  <Nav />
+  <main id="top">
+    <section class="hero" id="hero">
+      <div>
+        {data.heroBadge && <span class="badge">{data.heroBadge}</span>}
+        <h1 class="hero__title">{data.tagline}</h1>
+        <p class="hero__description">{data.description}</p>
+        <div class="hero__cta">
+          <a class="button" href={data.cta.href}>{data.cta.label}</a>
+          {data.secondaryCta && (
+            <a class="button" style="background: rgba(255,255,255,0.12); box-shadow: none;" href={data.secondaryCta.href}>
+              {data.secondaryCta.label}
+            </a>
+          )}
+        </div>
+      </div>
+      <div class="card">
+        <h2>{data.title}</h2>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Экспертиза и услуги</h2>
+      <div class="grid grid-3">
+        {data.services.map((service) => (
+          <article class="service-card">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            {service.bullets && (
+              <ul>
+                {service.bullets.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="tech">
+      <h2>Технологический стек</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Backend</h3>
+          <div class="tag-list">
+            {data.techStack.backend.map((tech) => (
+              <span class="tag">{tech}</span>
+            ))}
+          </div>
+        </div>
+        <div class="card">
+          <h3>Frontend</h3>
+          <div class="tag-list">
+            {data.techStack.frontend.map((tech) => (
+              <span class="tag">{tech}</span>
+            ))}
+          </div>
+        </div>
+        <div class="card">
+          <h3>Mobile</h3>
+          <div class="tag-list">
+            {data.techStack.mobile.map((tech) => (
+              <span class="tag">{tech}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="values">
+      <h2>Что нас отличает</h2>
+      <div class="grid grid-3">
+        {data.values.map((value) => (
+          <article class="card">
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="process">
+      <h2>Процесс сотрудничества</h2>
+      <div class="grid grid-2">
+        {data.process.map((step, index) => (
+          <article class="card">
+            <span class="badge">Этап {index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="blog">
+      <h2>{data.blogTeaser.title}</h2>
+      <p>{data.blogTeaser.description}</p>
+      <div class="grid grid-2" style="margin-top: 2rem;">
+        {posts.map((post) => (
+          <article class="blog-card">
+            <h3><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            <div class="tag-list" style="margin-top: 1.25rem;">
+              <span class="tag">{new Date(post.data.pubDate).toLocaleDateString('ru-RU')}</span>
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+      <div style="margin-top: 2rem;">
+        <a class="button" href="/blog">Все статьи</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Свяжитесь с нами</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Контакты</h3>
+          <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
+          <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
+          <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
+          <p>Локация: {data.contact.address}</p>
+        </div>
+        <div class="card">
+          <h3>Как начинаем работу</h3>
+          <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
+          <a class="button" href={`mailto:${data.contact.email}`}>Назначить встречу</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer contact={data.contact} />
+</BaseLayout>

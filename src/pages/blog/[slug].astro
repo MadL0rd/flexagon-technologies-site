@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const homeEntry = await getEntry('home', 'home');
+const contact = homeEntry.data.contact;
+---
+<BaseLayout title={`${post.data.title} — Flexagon Technologies`} description={post.data.description}>
+  <Nav />
+  <main>
+    <article class="card" style="padding: 3rem;">
+      <header>
+        <a href="/blog" style="display: inline-flex; gap: 0.5rem; align-items: center; color: rgba(248, 249, 251, 0.75);">← Вернуться ко всем статьям</a>
+        <h1 style="margin-top: 1.5rem;">{post.data.title}</h1>
+        <p style="color: rgba(248, 249, 251, 0.65); margin-bottom: 1.5rem;">
+          {new Date(post.data.pubDate).toLocaleDateString('ru-RU')} · {post.data.author}
+        </p>
+        {post.data.tags.length > 0 && (
+          <div class="tag-list" style="margin-bottom: 2rem;">
+            {post.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <Footer contact={contact} />
+</BaseLayout>

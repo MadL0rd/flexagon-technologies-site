@@ -1,0 +1,22 @@
+{
+  "name": "flexagon",
+  "version": "1.0.0",
+  "description": "Flexagon Technologies company site built with Astro",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "keywords": [
+    "astro",
+    "flexagon",
+    "it-studio"
+  ],
+  "author": "Flexagon Technologies",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^5.13.9"
+  }
+}

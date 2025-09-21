@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const homeEntry = await getEntry('home', 'home');
+const teaser = homeEntry.data.blogTeaser;
+const contact = homeEntry.data.contact;
+---
+<BaseLayout title={`${teaser.title} — Flexagon Technologies`} description={teaser.description}>
+  <Nav />
+  <main>
+    <section>
+      <h1>{teaser.title}</h1>
+      <p style="max-width: 720px;">{teaser.description}</p>
+    </section>
+    <section>
+      <div class="grid" style="gap: 2.5rem;">
+        {posts.map((post) => (
+          <article class="blog-card">
+            <header>
+              <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+              <p style="margin-bottom: 0.75rem; color: rgba(248, 249, 251, 0.66);">
+                {new Date(post.data.pubDate).toLocaleDateString('ru-RU')} · {post.data.author}
+              </p>
+            </header>
+            <p>{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="tag-list" style="margin-top: 1.5rem;">
+                {post.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer contact={contact} />
+</BaseLayout>
