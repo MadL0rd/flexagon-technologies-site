@@ -1,8 +1,8 @@
 ---
 title: "Flexagon Technologies"
-tagline: "Инженерим надежные цифровые продукты"
-heroBadge: "Full-stack IT студия"
-description: "Flexagon Technologies — команда инженеров, которая превращает идеи в устойчивые серверные платформы, удобные фронтенд-приложения и нативные мобильные сервисы."
+tagline: "Сервисы для реальных людей"
+heroBadge: "Full-cycle IT студия"
+description: "Flexagon Technologies — команда инженеров, которая превращает идеи в устойчивые серверные платформы, удобные фронтенд-приложения и мобильные сервисы."
 cta:
   label: "Обсудить проект"
   href: "#contact"
@@ -21,7 +21,7 @@ contact:
   actionIllustration: "calendar-check.svg"
 seo:
   title: "Flexagon Technologies — разработка на NestJS, React и LynxJS"
-  description: "Full-stack IT студия, которая помогает запускать и масштабировать цифровые продукты на backend NestJS, фронтенде React и мобильном LynxJS."
+  description: "Full-cycle IT студия, которая помогает запускать и масштабировать цифровые продукты на backend NestJS, фронтенде React и мобильном LynxJS."
 ---
 Помогаем технологическим компаниям и быстрорастущим стартапам строить цифровые продукты, которые выдерживают рост пользователей и требований.
 
