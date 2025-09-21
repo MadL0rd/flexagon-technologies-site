@@ -106,7 +106,7 @@
 
 .blog-card__title {
   display: block;
-  font-family: 'Russo One', 'SF Pro Display', sans-serif;
+  font-family: 'Russo One', sans-serif;
   font-size: 1.15rem;
   margin-bottom: 1rem;
   color: var(--color-light);

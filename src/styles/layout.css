@@ -70,7 +70,7 @@ nav {
 }
 
 .nav-title {
-  font-family: 'Russo One', 'SF Pro Display', sans-serif;
+  font-family: 'Russo One', sans-serif;
   letter-spacing: 0.05em;
   font-size: 1.05rem;
   color: var(--color-light);
