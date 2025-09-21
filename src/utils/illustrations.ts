@@ -3,7 +3,16 @@ const illustrationEntries = Object.entries(
 );
 
 const illustrationMap: Record<string, string> = Object.fromEntries(
-  illustrationEntries.map(([path, mod]) => [path.split('/').pop()!, mod as string])
+  illustrationEntries.map(([path, mod]) => {
+    const filename = path.split('/').pop()!;
+    if (typeof mod === 'string') {
+      return [filename, mod];
+    }
+    if (typeof mod === 'object' && mod && 'src' in mod) {
+      return [filename, (mod as { src: string }).src];
+    }
+    return [filename, ''];
+  })
 );
 
 export function getIllustrationUrl(name?: string | null) {
