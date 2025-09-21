@@ -60,6 +60,28 @@ section {
   margin-bottom: 6rem;
 }
 
+section[id] {
+  scroll-margin-top: clamp(6rem, 12vw, 8.5rem);
+}
+
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: calc(6.5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+section > h2 {
+  position: relative;
+  color: var(--text-section-title);
+}
+
+section > h2::before {
+  content: '▶︎';
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: var(--text-section-marker);
+}
+
 h1,
  h2,
  h3,

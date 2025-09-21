@@ -2,17 +2,19 @@
 
 :root {
   color-scheme: light dark;
-  --color-primary: #80CD5C;
+  --color-primary: #7fc45f;
   --color-primary-dark: #2f870f;
   --color-dark: #111216;
   --color-mid: #1f2024;
   --color-light: #e0e9e1;
   --color-muted: #6b7280;
 
-  --text-page-title: #e6f0e7;
   --text-brand-name: #f1faef;
+  --text-page-title: #e6f0e7;
+  --text-section-title: #7fb367;
+  --text-section-marker: #e6f0e7cc;
 
-  --text-strong: #8cc572;
+  --text-strong: #7fb367;
   --text-body: #f8f9fbdb;
   --text-secondary: #f8f9fbc7;
   --text-muted: #f8f9fbb8;
