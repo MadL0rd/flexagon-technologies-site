@@ -1,23 +1,160 @@
 ---
 import logoUrl from '@assets/logo.svg?url';
+import menuIcon from '@assets/menu-mobile.svg?raw';
 
 const isHome = Astro.url.pathname === '/';
 const link = (anchor: string) => (isHome ? anchor : `/${anchor}`);
+
+const navItems = [
+  { href: link('#services'), label: 'Услуги' },
+  { href: link('#tech'), label: 'Технологии' },
+  { href: link('#process'), label: 'Процесс' },
+  { href: '/blog', label: 'Блог' },
+  { href: link('#contact'), label: 'Контакты' },
+];
 ---
-<nav>
-  <div class="navbar">
+<nav class="site-nav" data-nav>
+  <div class="navbar" data-nav-bar>
     <a class="nav-brand" href="/" aria-label="Flexagon Technologies — на главную">
       <span class="nav-logo">
         <img src={logoUrl} alt="Flexagon Technologies" width="140" height="48" loading="lazy" />
       </span>
       <span class="nav-title" role="heading" aria-level="1">Flexagon Technologies</span>
     </a>
-    <div class="nav-links">
-      <a href={link('#services')}>Услуги</a>
-      <a href={link('#tech')}>Технологии</a>
-      <a href={link('#process')}>Процесс</a>
-      <a href="/blog">Блог</a>
-      <a href={link('#contact')}>Контакты</a>
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Открыть меню"
+      aria-haspopup="true"
+      data-nav-toggle
+    >
+      <span class="nav-toggle__icon" aria-hidden="true" set:html={menuIcon}></span>
+    </button>
+    <div class="nav-links nav-links--desktop">
+      {navItems.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </div>
+  </div>
+  <div class="nav-menu" id="mobile-menu" data-mobile-menu hidden>
+    <div class="nav-menu__content">
+      <nav aria-label="Мобильное меню" class="nav-menu__links">
+        {navItems.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
     </div>
   </div>
 </nav>
+
+<script type="module">
+  (() => {
+    const navRoot = document.querySelector('[data-nav]');
+    if (!navRoot) return;
+
+    const toggle = navRoot.querySelector('[data-nav-toggle]');
+    const mobileMenu = navRoot.querySelector('[data-mobile-menu]');
+    const mobileLinks = mobileMenu ? Array.from(mobileMenu.querySelectorAll('a')) : [];
+    const desktopQuery = window.matchMedia('(min-width: 768px)');
+    let previousOverflow = '';
+    let openAnimationFrame = 0;
+
+    const closeMenu = () => {
+      if (!navRoot.classList.contains('is-open') && !openAnimationFrame) return;
+      if (openAnimationFrame) {
+        cancelAnimationFrame(openAnimationFrame);
+        openAnimationFrame = 0;
+      }
+      if (navRoot.classList.contains('is-open')) {
+        navRoot.classList.remove('is-open');
+      }
+      navRoot.classList.add('is-closing');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню');
+      }
+      document.body.style.overflow = previousOverflow;
+    };
+
+    const openMenu = () => {
+      if (navRoot.classList.contains('is-open')) return;
+      previousOverflow = document.body.style.overflow;
+      navRoot.classList.remove('is-closing');
+      if (mobileMenu) {
+        mobileMenu.removeAttribute('hidden');
+        mobileMenu.getBoundingClientRect();
+      }
+      if (openAnimationFrame) {
+        cancelAnimationFrame(openAnimationFrame);
+      }
+      openAnimationFrame = requestAnimationFrame(() => {
+        navRoot.classList.add('is-open');
+        openAnimationFrame = 0;
+      });
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Закрыть меню');
+      }
+      document.body.style.overflow = 'hidden';
+    };
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        if (navRoot.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', (event) => {
+        if (event.target === mobileMenu) {
+          closeMenu();
+        }
+      });
+
+      mobileMenu.addEventListener('transitionend', (event) => {
+        if (event.target !== mobileMenu || event.propertyName !== 'opacity') {
+          return;
+        }
+        if (navRoot.classList.contains('is-open')) {
+          return;
+        }
+        navRoot.classList.remove('is-closing');
+        mobileMenu.setAttribute('hidden', '');
+      });
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    const handleDesktopChange = (event) => {
+      if (event.matches) {
+        closeMenu();
+      }
+    };
+
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener('change', handleDesktopChange);
+    } else {
+      desktopQuery.addListener(handleDesktopChange);
+    }
+
+    if (desktopQuery.matches) {
+      closeMenu();
+    }
+  })();
+</script>
