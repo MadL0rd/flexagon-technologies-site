@@ -32,36 +32,91 @@ const link = (anchor: string) => (isHome ? anchor : `/${anchor}`);
     document.querySelectorAll('.navbar').forEach((navbar) => {
       const toggle = navbar.querySelector('.nav-toggle');
       const navLinks = navbar.querySelector('.nav-links');
+      const navElement = navbar.closest('nav');
 
       if (!(toggle instanceof HTMLButtonElement) || !(navLinks instanceof HTMLElement)) {
         return;
       }
 
-      const closeMenu = () => {
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Открыть меню');
-        navLinks.classList.remove('is-open');
+      const setMenuState = (isOpen: boolean) => {
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+        navbar.classList.toggle('is-open', isOpen);
+        navElement?.classList.toggle('is-open', isOpen);
+        navLinks.classList.toggle('is-open', isOpen);
+        document.body.classList.toggle('nav-is-open', isOpen);
       };
+
+      navbar.classList.add('has-collapsible-nav');
+
+      const closeMenu = (focusToggle = false) => {
+        setMenuState(false);
+
+        if (focusToggle) {
+          toggle.focus();
+        }
+      };
+
+      setMenuState(false);
 
       toggle.addEventListener('click', () => {
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         const nextExpanded = !expanded;
 
-        toggle.setAttribute('aria-expanded', String(nextExpanded));
-        toggle.setAttribute('aria-label', nextExpanded ? 'Закрыть меню' : 'Открыть меню');
-        navLinks.classList.toggle('is-open', nextExpanded);
+        setMenuState(nextExpanded);
       });
 
       navLinks.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', closeMenu);
       });
 
+      navbar.addEventListener('click', (event) => {
+        if (!navbar.classList.contains('is-open')) {
+          return;
+        }
+
+        const target = event.target;
+
+        if (!(target instanceof Node)) {
+          return;
+        }
+
+        if (navLinks.contains(target)) {
+          return;
+        }
+
+        const navMain = navbar.querySelector('.nav-main');
+
+        if (navMain instanceof HTMLElement && navMain.contains(target)) {
+          return;
+        }
+
+        closeMenu();
+      });
+
+      const handleKeydown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          closeMenu(true);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeydown);
+
       const desktopMediaQuery = window.matchMedia('(min-width: 769px)');
-      desktopMediaQuery.addEventListener('change', (event) => {
+      const handleViewportChange = (event: MediaQueryListEvent) => {
         if (event.matches) {
           closeMenu();
         }
-      });
+      };
+
+      desktopMediaQuery.addEventListener('change', handleViewportChange);
+
+      const cleanup = () => {
+        document.removeEventListener('keydown', handleKeydown);
+        desktopMediaQuery.removeEventListener('change', handleViewportChange);
+      };
+
+      window.addEventListener('beforeunload', cleanup, { once: true });
     });
   });
 </script>
