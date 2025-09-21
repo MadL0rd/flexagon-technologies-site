@@ -10,9 +10,6 @@ const { Content } = await homeEntry.render();
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
-const serviceThemes = ['service-card--backend', 'service-card--frontend', 'service-card--mobile'];
-const valueThemes = ['card--value-partnership', 'card--value-discipline', 'card--value-communication'];
-const processThemes = ['card--process-discovery', 'card--process-design', 'card--process-build', 'card--process-support'];
 ---
 <BaseLayout title={data.seo?.title ?? data.title} description={data.seo?.description ?? data.description}>
   <Nav />
@@ -31,7 +28,7 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
           )}
         </div>
       </div>
-      <div class="card card--overview">
+      <div class="card">
         <h2>{data.title}</h2>
         <div class="prose">
           <Content />
@@ -42,8 +39,11 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
     <section id="services">
       <h2>Экспертиза и услуги</h2>
       <div class="grid grid-3">
-        {data.services.map((service, index) => (
-          <article class={`service-card ${serviceThemes[index] ?? 'service-card--generic'}`}>
+        {data.services.map((service) => (
+          <article
+            class="service-card"
+            data-illustration={service.illustration ?? undefined}
+          >
             <h3>{service.title}</h3>
             <p>{service.description}</p>
             {service.bullets && (
@@ -61,38 +61,24 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
     <section id="tech">
       <h2>Технологический стек</h2>
       <div class="grid grid-3">
-        <div class="card card--tech-backend">
-          <h3>Backend</h3>
-          <div class="tag-list">
-            {data.techStack.backend.map((tech) => (
-              <span class="tag">{tech}</span>
-            ))}
+        {data.techStack.map((stack) => (
+          <div class="card" data-illustration={stack.illustration ?? undefined}>
+            <h3>{stack.title}</h3>
+            <div class="tag-list">
+              {stack.items.map((tech) => (
+                <span class="tag">{tech}</span>
+              ))}
+            </div>
           </div>
-        </div>
-        <div class="card card--tech-frontend">
-          <h3>Frontend</h3>
-          <div class="tag-list">
-            {data.techStack.frontend.map((tech) => (
-              <span class="tag">{tech}</span>
-            ))}
-          </div>
-        </div>
-        <div class="card card--tech-mobile">
-          <h3>Mobile</h3>
-          <div class="tag-list">
-            {data.techStack.mobile.map((tech) => (
-              <span class="tag">{tech}</span>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
 
     <section id="values">
       <h2>Что нас отличает</h2>
       <div class="grid grid-3">
-        {data.values.map((value, index) => (
-          <article class={`card ${valueThemes[index] ?? 'card--value-generic'}`}>
+        {data.values.map((value) => (
+          <article class="card" data-illustration={value.illustration ?? undefined}>
             <h3>{value.title}</h3>
             <p>{value.description}</p>
           </article>
@@ -104,7 +90,7 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
       <h2>Процесс сотрудничества</h2>
       <div class="grid grid-2">
         {data.process.map((step, index) => (
-          <article class={`card ${processThemes[index] ?? 'card--process-generic'}`}>
+          <article class="card" data-illustration={step.illustration ?? undefined}>
             <span class="badge">Этап {index + 1}</span>
             <h3>{step.title}</h3>
             <p>{step.description}</p>
@@ -118,7 +104,7 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
       <p>{data.blogTeaser.description}</p>
       <div class="grid grid-2" style="margin-top: 2rem;">
         {posts.map((post) => (
-          <a class="blog-card blog-card--teaser" href={`/blog/${post.slug}/`}>
+          <a class="blog-card" href={`/blog/${post.slug}/`}>
             <span class="blog-card__title">{post.data.title}</span>
             <p>{post.data.description}</p>
             <div class="tag-list" style="margin-top: 1.25rem;">
@@ -138,14 +124,18 @@ const processThemes = ['card--process-discovery', 'card--process-design', 'card-
     <section id="contact">
       <h2>Свяжитесь с нами</h2>
       <div class="grid grid-2">
-        <div class="card card--contact-info">
+        <div class="card" data-illustration={data.contact.illustration ?? undefined}>
           <h3>Контакты</h3>
           <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
         </div>
-        <a class="card contact-cta card--contact-action" href={`mailto:${data.contact.email}`}>
+        <a
+          class="card contact-cta"
+          data-illustration={data.contact.actionIllustration ?? undefined}
+          href={`mailto:${data.contact.email}`}
+        >
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
           <span class="button button--secondary">Назначить встречу</span>

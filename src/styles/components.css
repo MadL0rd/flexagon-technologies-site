@@ -132,6 +132,13 @@
   color: inherit;
 }
 
+.card,
+.service-card,
+.blog-card,
+.contact-cta {
+  --card-illustration-opacity: 0.18;
+}
+
 .card::after,
 .service-card::after,
 .blog-card::after,
@@ -188,67 +195,54 @@
   text-decoration: none;
 }
 
-.card--overview {
-  --card-illustration: none;
+[data-illustration='network-node']::after {
+  background-image: url('../assets/illustrations/network-node.svg');
 }
 
-.service-card--backend,
-.card--tech-backend {
-  --card-illustration: url('../assets/illustrations/network-node.svg');
+[data-illustration='frontend-layout']::after {
+  background-image: url('../assets/illustrations/frontend-layout.svg');
 }
 
-.service-card--frontend,
-.card--tech-frontend {
-  --card-illustration: url('../assets/illustrations/frontend-layout.svg');
+[data-illustration='mobile-device']::after {
+  background-image: url('../assets/illustrations/mobile-device.svg');
 }
 
-.service-card--mobile,
-.card--tech-mobile {
-  --card-illustration: url('../assets/illustrations/mobile-device.svg');
+[data-illustration='generic-orbit']::after {
+  background-image: url('../assets/illustrations/generic-orbit.svg');
 }
 
-.service-card--generic,
-.card--tech-generic,
-.card--value-generic,
-.card--process-generic {
-  --card-illustration: url('../assets/illustrations/generic-orbit.svg');
+[data-illustration='growth-chart']::after {
+  background-image: url('../assets/illustrations/growth-chart.svg');
 }
 
-.card--value-partnership {
-  --card-illustration: url('../assets/illustrations/growth-chart.svg');
+[data-illustration='discipline-monitor']::after {
+  background-image: url('../assets/illustrations/discipline-monitor.svg');
 }
 
-.card--value-discipline {
-  --card-illustration: url('../assets/illustrations/discipline-monitor.svg');
-}
-
-.card--value-communication,
-.card--contact-info {
-  --card-illustration: url('../assets/illustrations/chat-bubbles.svg');
+[data-illustration='chat-bubbles'] {
   --card-illustration-opacity: 0.2;
 }
 
-.card--process-discovery {
-  --card-illustration: url('../assets/illustrations/process-discovery.svg');
+[data-illustration='chat-bubbles']::after {
+  background-image: url('../assets/illustrations/chat-bubbles.svg');
 }
 
-.card--process-design {
-  --card-illustration: url('../assets/illustrations/process-design.svg');
+[data-illustration='process-discovery']::after {
+  background-image: url('../assets/illustrations/process-discovery.svg');
 }
 
-.card--process-build {
-  --card-illustration: url('../assets/illustrations/process-build.svg');
+[data-illustration='process-design']::after {
+  background-image: url('../assets/illustrations/process-design.svg');
 }
 
-.card--process-support {
-  --card-illustration: url('../assets/illustrations/process-support.svg');
+[data-illustration='process-build']::after {
+  background-image: url('../assets/illustrations/process-build.svg');
 }
 
-.card--contact-action {
-  --card-illustration: url('../assets/illustrations/contact-action.svg');
+[data-illustration='process-support']::after {
+  background-image: url('../assets/illustrations/process-support.svg');
 }
 
-.card--article {
-  --card-illustration: url('../assets/illustrations/article-doc.svg');
-  --card-illustration-opacity: 0.14;
+[data-illustration='contact-action']::after {
+  background-image: url('../assets/illustrations/contact-action.svg');
 }

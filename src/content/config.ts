@@ -21,24 +21,29 @@ const home = defineCollection({
       z.object({
         title: z.string(),
         description: z.string(),
+        illustration: z.string(),
         bullets: z.array(z.string()).optional()
       })
     ),
-    techStack: z.object({
-      backend: z.array(z.string()),
-      frontend: z.array(z.string()),
-      mobile: z.array(z.string())
-    }),
+    techStack: z.array(
+      z.object({
+        title: z.string(),
+        illustration: z.string().optional(),
+        items: z.array(z.string())
+      })
+    ),
     values: z.array(
       z.object({
         title: z.string(),
-        description: z.string()
+        description: z.string(),
+        illustration: z.string().optional()
       })
     ),
     process: z.array(
       z.object({
         title: z.string(),
-        description: z.string()
+        description: z.string(),
+        illustration: z.string().optional()
       })
     ),
     blogTeaser: z.object({
@@ -49,7 +54,9 @@ const home = defineCollection({
       email: z.string(),
       phone: z.string(),
       telegram: z.string(),
-      address: z.string()
+      address: z.string(),
+      illustration: z.string().optional(),
+      actionIllustration: z.string().optional()
     }),
     seo: z
       .object({
