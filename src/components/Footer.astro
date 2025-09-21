@@ -11,12 +11,24 @@ const { contact }: { contact: ContactInfo } = Astro.props;
 ---
 <footer>
   <div class="inner">
-    <img src={logoUrl} alt="Логотип Flexagon" width="140" height="48" loading="lazy" />
-    <p>© {new Date().getFullYear()} Flexagon Technologies. Все права защищены.</p>
-    <p>
-      <strong>Email:</strong> <a href={`mailto:${contact.email}`}>{contact.email}</a>
-      &nbsp;·&nbsp;
-      <strong>Telegram:</strong> <a href={contact.telegram} target="_blank" rel="noopener">{contact.telegram}</a>
-    </p>
+    <div class="brand">
+      <img
+        class="brand__logo"
+        src={logoUrl}
+        alt="Логотип Flexagon"
+        width="140"
+        height="48"
+        loading="lazy"
+      />
+      <div class="brand__text">
+        <p>© {new Date().getFullYear()} Flexagon Technologies. Все права защищены.</p>
+        <p>
+          <strong>Email:</strong> <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          &nbsp;·&nbsp;
+          <strong>Telegram:</strong>{' '}
+          <a href={contact.telegram} target="_blank" rel="noopener">{contact.telegram}</a>
+        </p>
+      </div>
+    </div>
   </div>
 </footer>
