@@ -7,7 +7,9 @@ const link = (anchor: string) => (isHome ? anchor : `/${anchor}`);
 <nav>
   <div class="navbar">
     <a class="nav-brand" href="/" aria-label="Flexagon Technologies — на главную">
-      <img src={logoUrl} alt="Flexagon Technologies" width="140" height="48" loading="lazy" />
+      <span class="nav-logo">
+        <img src={logoUrl} alt="Flexagon Technologies" width="140" height="48" loading="lazy" />
+      </span>
       <span class="nav-title" role="heading" aria-level="1">Flexagon Technologies</span>
     </a>
     <div class="nav-links">
