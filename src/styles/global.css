@@ -442,6 +442,20 @@ nav {
   color: rgba(248, 249, 251, 0.78);
 }
 
+.hero--blog {
+  grid-template-columns: 1fr;
+  padding: 3.5rem;
+  gap: 1.5rem;
+}
+
+.hero--blog .hero__title {
+  margin-bottom: 1rem;
+}
+
+.hero__description--wide {
+  max-width: 720px;
+}
+
 .hero__cta {
   display: flex;
   gap: 1rem;

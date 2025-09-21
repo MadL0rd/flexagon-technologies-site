@@ -14,9 +14,11 @@ const contact = homeEntry.data.contact;
 <BaseLayout title={`${teaser.title} — Flexagon Technologies`} description={teaser.description}>
   <Nav />
   <main>
-    <section>
-      <h1>{teaser.title}</h1>
-      <p style="max-width: 720px;">{teaser.description}</p>
+    <section class="hero hero--blog">
+      <div>
+        <h1 class="hero__title">{teaser.title}</h1>
+        <p class="hero__description hero__description--wide">{teaser.description}</p>
+      </div>
     </section>
     <section>
       <div class="grid" style="gap: 2.5rem;">
