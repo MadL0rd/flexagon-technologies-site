@@ -115,8 +115,8 @@ const posts = (await getCollection('blog'))
       <p>{data.blogTeaser.description}</p>
       <div class="grid grid-2" style="margin-top: 2rem;">
         {posts.map((post) => (
-          <article class="blog-card">
-            <h3><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+          <a class="blog-card" href={`/blog/${post.slug}/`}>
+            <span class="blog-card__title">{post.data.title}</span>
             <p>{post.data.description}</p>
             <div class="tag-list" style="margin-top: 1.25rem;">
               <span class="tag">{new Date(post.data.pubDate).toLocaleDateString('ru-RU')}</span>
@@ -124,7 +124,7 @@ const posts = (await getCollection('blog'))
                 <span class="tag">{tag}</span>
               ))}
             </div>
-          </article>
+          </a>
         ))}
       </div>
       <div style="margin-top: 2rem;">
@@ -142,11 +142,11 @@ const posts = (await getCollection('blog'))
           <p>Telegram: <a href={data.contact.telegram} target="_blank" rel="noopener">{data.contact.telegram}</a></p>
           <p>Локация: {data.contact.address}</p>
         </div>
-        <div class="card">
+        <a class="card contact-cta" href={`mailto:${data.contact.email}`}>
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>
-          <a class="button" href={`mailto:${data.contact.email}`}>Назначить встречу</a>
-        </div>
+          <span class="button button--secondary">Назначить встречу</span>
+        </a>
       </div>
     </section>
   </main>

@@ -33,19 +33,16 @@ techStack:
     - NestJS
     - Node.js
     - PostgreSQL
+    - MongoDB
     - Redis
-    - GraphQL
   frontend:
     - React
     - Astro
-    - Next.js
     - Tailwind CSS
-    - Storybook
   mobile:
     - LynxJS
-    - Capacitor
-    - Firebase
-    - AppCenter
+    - Swift
+    - React Native
 values:
   - title: "Продуктовая вовлеченность"
     description: "Работаем как продуктовые партнеры: разбираемся в бизнес-целях, выстраиваем roadmap и помогаем с исследованиями."
