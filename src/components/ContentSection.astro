@@ -1,0 +1,58 @@
+---
+interface Item {
+  title: string;
+  description?: string;
+  bullets?: string[];
+  items?: string[];
+  illustration?: string;
+}
+
+interface Section {
+  title: string;
+  layout?: 'two' | 'three';
+  tag?: string;
+  items: Item[];
+}
+
+interface Props {
+  id?: string;
+  section: Section;
+  variant?: 'card' | 'service';
+}
+
+const { id, section, variant = 'card' } = Astro.props;
+const gridClass = section.layout === 'two' ? 'grid grid-2' : 'grid grid-3';
+const cardClass = variant === 'service' ? 'service-card' : 'card';
+---
+<section id={id}>
+  <h2>{section.title}</h2>
+  <div class={gridClass}>
+    {section.items.map((item, index) => {
+      const illustration = item.illustration
+        ? `url(/assets/illustrations/${item.illustration})`
+        : undefined;
+      const cardStyle = illustration ? { '--card-illustration': illustration } : undefined;
+      return (
+        <article class={cardClass} style={cardStyle as any}>
+          {section.tag && <span class="badge">{section.tag} {index + 1}</span>}
+          <h3>{item.title}</h3>
+          {item.description && <p>{item.description}</p>}
+          {item.items && item.items.length > 0 && (
+            <div class="tag-list">
+              {item.items.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+          {item.bullets && item.bullets.length > 0 && (
+            <ul>
+              {item.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      );
+    })}
+  </div>
+</section>

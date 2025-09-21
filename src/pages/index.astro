@@ -2,11 +2,13 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Nav from '@components/Nav.astro';
 import Footer from '@components/Footer.astro';
+import ContentSection from '@components/ContentSection.astro';
 import { getEntry, getCollection } from 'astro:content';
 
 const homeEntry = await getEntry('home', 'home');
 const data = homeEntry?.data!;
-const Content = await homeEntry?.render().then(result => result.Content);
+const Content = await homeEntry?.render().then((result) => result.Content);
+const { sections } = data;
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 2);
@@ -36,68 +38,13 @@ const posts = (await getCollection('blog'))
       </div>
     </section>
 
-    <section id="services">
-      <h2>Экспертиза и услуги</h2>
-      <div class="grid grid-3">
-        {data.services.map((service) => (
-          <article
-            class="service-card"
-            data-illustration={service.illustration ?? undefined}
-          >
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-            {service.bullets && (
-              <ul>
-                {service.bullets.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            )}
-          </article>
-        ))}
-      </div>
-    </section>
+    <ContentSection id="services" section={sections.services} variant="service" />
 
-    <section id="tech">
-      <h2>Технологический стек</h2>
-      <div class="grid grid-3">
-        {data.techStack.map((stack) => (
-          <div class="card" data-illustration={stack.illustration ?? undefined}>
-            <h3>{stack.title}</h3>
-            <div class="tag-list">
-              {stack.items.map((tech) => (
-                <span class="tag">{tech}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+    <ContentSection id="tech" section={sections.techStack} />
 
-    <section id="companyAdvantages">
-      <h2>Что нас отличает</h2>
-      <div class="grid grid-3">
-        {data.companyAdvantages.map((value) => (
-          <article class="card" data-illustration={value.illustration ?? undefined}>
-            <h3>{value.title}</h3>
-            <p>{value.description}</p>
-          </article>
-        ))}
-      </div>
-    </section>
+    <ContentSection id="values" section={sections.values} />
 
-    <section id="process">
-      <h2>Процесс сотрудничества</h2>
-      <div class="grid grid-2">
-        {data.process.map((step, index) => (
-          <article class="card" data-illustration={step.illustration ?? undefined}>
-            <span class="badge">Этап {index + 1}</span>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
-          </article>
-        ))}
-      </div>
-    </section>
+    <ContentSection id="process" section={sections.process} />
 
     <section id="blog">
       <h2>{data.blogTeaser.title}</h2>
@@ -124,7 +71,14 @@ const posts = (await getCollection('blog'))
     <section id="contact">
       <h2>Свяжитесь с нами</h2>
       <div class="grid grid-2">
-        <div class="card" data-illustration={data.contact.illustration ?? undefined}>
+        <div
+          class="card"
+          style={
+            data.contact.illustration
+              ? { '--card-illustration': `url(/assets/illustrations/${data.contact.illustration})` }
+              : undefined
+          }
+        >
           <h3>Контакты</h3>
           <p>Email: <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
           <p>Телефон: <a href={`tel:${data.contact.phone.replace(/[^+\d]/g, '')}`}>{data.contact.phone}</a></p>
@@ -133,8 +87,12 @@ const posts = (await getCollection('blog'))
         </div>
         <a
           class="card contact-cta"
-          data-illustration={data.contact.actionIllustration ?? undefined}
           href={`mailto:${data.contact.email}`}
+          style={
+            data.contact.actionIllustration
+              ? { '--card-illustration': `url(/assets/illustrations/${data.contact.actionIllustration})` }
+              : undefined
+          }
         >
           <h3>Как начинаем работу</h3>
           <p>Оставьте заявку, мы проведем вводной созвон и подготовим детальную оценку с вариантами сотрудничества.</p>

@@ -42,6 +42,8 @@
   border: 1px solid rgba(74, 183, 22, 0.42);
   box-shadow: var(--shadow-soft);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  --card-illustration: none;
+  --card-illustration-opacity: 0.18;
 }
 
 .card:not(.card-static):hover {
@@ -75,6 +77,8 @@
   border: 1px solid rgba(74, 183, 22, 0.55);
   background: rgba(17, 18, 22, 0.75);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  --card-illustration: none;
+  --card-illustration-opacity: 0.18;
 }
 
 .service-card:hover {
@@ -101,6 +105,8 @@
   display: block;
   color: inherit;
   text-decoration: none;
+  --card-illustration: none;
+  --card-illustration-opacity: 0.18;
 }
 
 .blog-card:hover {
@@ -130,6 +136,8 @@
   gap: 1.2rem;
   text-decoration: none;
   color: inherit;
+  --card-illustration: none;
+  --card-illustration-opacity: 0.18;
 }
 
 .card,
