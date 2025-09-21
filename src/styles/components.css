@@ -122,6 +122,11 @@
   color: var(--text-link);
 }
 
+.blog-card__meta {
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+
 .contact-cta {
   position: relative;
   overflow: hidden;
