@@ -151,7 +151,7 @@ p {
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card:hover {
+.card:not(.card-static):hover {
   border-color: rgba(140, 255, 120, 0.72);
   box-shadow: 0 26px 60px rgba(74, 183, 22, 0.22);
 }
